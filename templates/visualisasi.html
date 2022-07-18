@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{{ url_for('static', filename='dist/img/AdminLTELogo.png')}}" type="image/x-icon">
+  <title>Visualisasi</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css')}}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')}}">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/jqvmap/jqvmap.min.css')}}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/adminlte.min.css')}}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/daterangepicker/daterangepicker.css')}}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/summernote/summernote-bs4.min.css')}}">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="{{ url_for('static', filename='dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
+    <h3 class="animation__shake">Visualisasi</h3>
+    
+  </div>
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+     
+    </ul>
+
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link">
+      <img src="{{ url_for('static', filename='dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">SKRIPSI</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview">
+            <a href="/" class="nav-link ">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Dataset
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item has-treeview ">
+            <a href="/preprocessing" class="nav-link">
+              
+              <i class="nav-icon fas fa-tasks"></i>
+              <p>
+                Preprocessing
+               
+              </p>
+            </a>
+            
+          </li>
+
+
+          
+          <li class="nav-item">
+            <a href="/sentiment" class="nav-link">
+              <i class="nav-icon fas fa-grin"></i>
+              <p>
+                Data Sentiment
+               
+              </p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a href="/visualisasi" class="nav-link active">
+              <i class="nav-icon fas fa-chart-bar"></i>
+              <p>
+                Visualisasi
+              
+              </p>
+            </a>
+          </li>
+         
+          
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+          
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Visualisasi</h1>
+            <p>{{value}}</p>
+          </div><!-- /.col -->
+         
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-md-6">
+              <!-- AREA CHART -->
+     
+              <!-- /.card -->
+  
+              <!-- PIE CHART -->
+              <div class="card card-danger">
+                <div class="card-header">
+                  <h3 class="card-title">Bar Chart</h3>
+  
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="barChart" style="width:100%;max-width:600px"></canvas>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+  
+            </div>
+            <!-- /.col (LEFT) -->
+            <div class="col-md-6">
+              
+              <!-- BAR CHART -->
+              <div class="card card-danger">
+                <div class="card-header">
+                  <h3 class="card-title">Pie Chart</h3>
+  
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="chart">
+                    <canvas id="pieChart" style="width:100%;max-width:600px"></canvas>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+  
+            </div>
+            <!-- /.col (RIGHT) -->
+          </div>
+
+        
+              <div class="card">
+                <div class="card-header bg-info text-light">
+                  <h3> <i class="fas fa-check-circle mr-1"></i>Rekomendasi</h3>
+                </div>
+                <div class="card-body">
+                  <div class="container-fluid">
+                
+                    <p>{{hasil}}</p>
+                  </div>
+                </div>
+              </div>
+          
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+          
+          
+
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2022 <a href="#">Edi Hendriawan</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Skripsi</b>
+    </div>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js')}}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{{ url_for('static', filename='plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- ChartJS -->
+<script src="{{ url_for('static', filename='plugins/chart.js/Chart.min.js')}}"></script>
+<!-- Sparkline -->
+<script src="{{ url_for('static', filename='plugins/sparklines/sparkline.js')}}"></script>
+<!-- JQVMap -->
+<script src="{{ url_for('static', filename='plugins/jqvmap/jquery.vmap.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{{ url_for('static', filename='plugins/jquery-knob/jquery.knob.min.js')}}"></script>
+<!-- daterangepicker -->
+<script src="{{ url_for('static', filename='plugins/moment/moment.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/daterangepicker/daterangepicker.js')}}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{{ url_for('static', filename='plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+<!-- Summernote -->
+<script src="{{ url_for('static', filename='plugins/summernote/summernote-bs4.min.js')}}"></script>
+<!-- overlayScrollbars -->
+<script src="{{ url_for('static', filename='plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{ url_for('static', filename='dist/js/adminlte.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ url_for('static', filename='dist/js/demo.js')}}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{{ url_for('static', filename='dist/js/pages/dashboard.js')}}"></script>
+
+<script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js')}}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{ url_for('static', filename='plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/jszip/jszip.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{ url_for('static', filename='dist/js/adminlte.min.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ url_for('static', filename='dist/js/demo.js')}}"></script>
+<!-- Page specific script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+
+  // $(function () {
+  //        //---------------------
+  //     //- STACKED BAR CHART -
+  //     //---------------------
+  //     var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+  //     var stackedBarChartData = $.extend(true, {}, barChartData)
+  
+  //     var stackedBarChartOptions = {
+  //       responsive              : true,
+  //       maintainAspectRatio     : false,
+  //       scales: {
+  //         xAxes: [{
+  //           stacked: true,
+  //         }],
+  //         yAxes: [{
+  //           stacked: true
+  //         }]
+  //       }
+  //     }
+  
+  //     new Chart(stackedBarChartCanvas, {
+  //       type: 'bar',
+  //       data: stackedBarChartData,
+  //       options: stackedBarChartOptions
+  //     })
+  //   })
+
+  //   var xValues = ["Positif", "Netral", "Negatif"];
+  //   var yValues = [30, 49, 32,0];
+  //   var barColors = ["red", "green","blue"];
+    
+  //   new Chart("barChart", {
+  //       type: "bar",
+  //       data: {
+  //           labels: xValues,
+  //           datasets: [{
+  //               backgroundColor: barColors,
+  //               data: yValues
+  //           }]
+  //       },
+  //       options: {
+  //           legend: {display: false},
+  //           title: {
+  //               display: true,
+  //               text: "World Wine Production 2018"
+  //           }
+  //       }
+  //   });
+    
+  //   new Chart("pieChart", {
+  //       type: "pie",
+  //       data: {
+  //           labels: xValues,
+  //           datasets: [{
+  //               backgroundColor: barColors,
+  //               data: yValues
+  //           }]
+  //       },
+  //       options: {
+  //           legend: {display: false},
+  //           title: {
+  //               display: true,
+  //               text: "World Wine Production 2018"
+  //           }
+  //       }
+  //   });
+    
+
+  var ctx = document.getElementById("barChart").getContext("2d");
+  var lineChart = new Chart(ctx, {
+    type : "bar",
+    data : {
+      labels : ["Positif", "Netral", "Negatif"],
+      datasets :[
+        {
+          label : "Data Point",
+          data : {{values | safe}},
+          backgroundColor : ["green","blue","red"],
+          lineTension : 0.1
+        }
+      ]
+    },
+    option: {
+      responsive : false
+    }
+  });
+
+  var ctx = document.getElementById("pieChart").getContext("2d");
+  var lineChart = new Chart(ctx, {
+    type : "pie",
+    data : {
+      labels : ["Positif", "Netral", "Negatif"],
+      datasets :[
+        {
+          label : "Data Point",
+          data : {{values | safe}},
+          backgroundColor : ["green","blue","red"],
+          lineTension : 0.1
+        }
+      ]
+    },
+    option: {
+      responsive : false
+    }
+  });
+
+  </script>
+
+</body>
+</html>
